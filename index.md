@@ -1,10 +1,10 @@
-#Project status
+# Project status
 
-- [x] Design
-- [x] Mockups
-- [x] Development
-- [x] Unit testing
-- [ ] QA
-- [ ] Stage
-- [ ] Beta Testing
-- [ ] Production
+- [x]  Design
+- [ ]  Mockups
+- [x]  Development
+- [ ]  Unit testing
+- [ ]  QA
+- [ ]  Stage
+- [ ]  Beta Testing
+- [ ]  Production
