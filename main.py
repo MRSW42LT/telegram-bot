@@ -1,35 +1,27 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-import Constants as keys
-import Responses as R
+from telebot import TeleBot
+from constants import API_KEY
 
-print ('bot started')
 
-def start_command(update):
-    update.message.reply_text('digite algo para iniciar')
+app = TeleBot(__name__)
 
-def help_command(update):
-    update.message.reply_text('just read the instructions https://denis.software/')
 
-def handle_message(update):
-    text = str(update.message.text).lower()
-    response = R.sample_responses(text)
-    update.message.reply_text(response)
+@app.route('/command ?(.*)')
+def example_command(message, cmd):
+    chat_dest = message['chat']['id']
+    msg = "Command Recieved: {}".format(cmd)
 
-def error(update):
-    print(f"Update {update} caused error {error}")
+    app.send_message(chat_dest, msg)
 
-def main():
 
-    updater = Updater(keys.API_KEY)
-    dispatcher = updater.dispatcher
+@app.route('(?!/).+')
+def parrot(message):
+   chat_dest = message['chat']['id']
+   user_msg = message['text']
 
-    dispatcher.add_handler(CommandHandler("start", start_command))
-    dispatcher.add_handler(CommandHandler("start", help_command))
+   msg = "Parrot Says: {}".format(user_msg)
+   app.send_message(chat_dest, msg)
 
-    dispatcher.add_handler(MessageHandler(Filters.text, handle_message))
 
-    dispatcher.add_error_handler(error)
-
-    updater.start_polling(1) # refresh a cada 1 segundo, 0 = instantâneo
-
-main()
+if __name__ == '__main__':
+    app.config['api_key'] = API_KEY
+    app.poll(debug=True)
