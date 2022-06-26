@@ -10,6 +10,4 @@ def cotar_dolar():
     dolar_price = soup.find(class_='cotMoeda nacional')
     dolar_price = dolar_price.find('input').get('value')
 
-    return str('O preço do dólar hoje é R$'+dolar_price)
-
-print (cotar_dolar())
+    return str('US$1,0 vale R$'+dolar_price+' hoje.')
