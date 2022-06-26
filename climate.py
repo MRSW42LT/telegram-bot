@@ -12,6 +12,4 @@ def get_climate(city):
     rain = 'Rain : ' + r.html.find('span#wob_pp', first=True).text
     location = r.html.find('#wob_loc', first=True).text
 
-    print (location , temp , description , humidity , wind , rain)
-
-get_climate('ponta grossa')
+    return location , temp , description , humidity , wind , rain
