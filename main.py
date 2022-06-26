@@ -90,7 +90,7 @@ async def inline_query(update: Update, context) -> None:
                 id=str(uuid4()),
                 title="tempo agora",
                 input_message_content=InputTextMessageContent(
-                    f'\n Used the command {query} \n\n{get_climate(data)}'
+                    f'<i>\n Used the command </i> {query} <b>{get_climate(data)}</b>' , parse_mode=ParseMode.HTML
                 ),
             ),
         ]
