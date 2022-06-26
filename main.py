@@ -20,6 +20,10 @@ from uuid import uuid4
 from telegram import InlineQueryResultArticle, InputTextMessageContent, Update
 from telegram.constants import ParseMode
 from telegram.ext import Application, CommandHandler, ContextTypes, InlineQueryHandler
+from constants import API_KEY
+
+from dolar import cotar_dolar
+from climate import get_climate
 
 # Enable logging
 logging.basicConfig(
@@ -39,35 +43,69 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     """Send a message when the command /help is issued."""
     await update.message.reply_text("Help!")
 
+async def dolar_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Send a message when the command /dolar is issued."""
+    await update.message.reply_text(cotar_dolar())
 
-async def inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def tempo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    city = " ".join(context.args)
+    await update.message.reply_text(get_climate(city))
+
+
+async def inline_query(update: Update, context) -> None:
     """Handle the inline query. This is run when you type: @botusername <query>"""
     query = update.inline_query.query
+    data = update.inline_query.query.replace('/tempo', '')
 
     if query == "":
         return
 
-    results = [
-        InlineQueryResultArticle(
-            id=str(uuid4()),
-            title="Result",
-            input_message_content=InputTextMessageContent(
-                f"<b>{escape(query)}</b>", parse_mode=ParseMode.HTML
+    if query == "/help":
+        results = [
+            InlineQueryResultArticle(
+                id=str(uuid4()),
+                title="help",
+                input_message_content=InputTextMessageContent(
+                    'ajuda', parse_mode=ParseMode.HTML
+                ),
             ),
-        ),
-    ]
+        ]
+        return await update.inline_query.answer(results)
 
-    await update.inline_query.answer(results)
+    if query == "/dolar":
+        results = [
+            InlineQueryResultArticle(
+                id=str(uuid4()),
+                title="dolar",
+                input_message_content=InputTextMessageContent(
+                    cotar_dolar(), parse_mode=ParseMode.HTML
+                ),
+            ),
+        ]
+        return await update.inline_query.answer(results)
 
+    if "/tempo" in query:
+        results = [
+            InlineQueryResultArticle(
+                id=str(uuid4()),
+                title="tempo agora",
+                input_message_content=InputTextMessageContent(
+                    f'\n Used the command {query} \n\n{get_climate(data)}'
+                ),
+            ),
+        ]
+        return await update.inline_query.answer(results)
 
 def main() -> None:
     """Run the bot."""
     # Create the Application and pass it your bot's token.
-    application = Application.builder().token("5335548437:AAExUey6rEeyXIJ7tb8gdw5vub7nJO68ApQ").build()
+    application = Application.builder().token(API_KEY).build()
 
     # on different commands - answer in Telegram
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
+    application.add_handler(CommandHandler("dolar", dolar_command))
+    application.add_handler(CommandHandler("tempo", tempo_command))
 
     # on non command i.e message - echo the message on Telegram
     application.add_handler(InlineQueryHandler(inline_query))

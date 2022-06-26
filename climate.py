@@ -12,4 +12,6 @@ def get_climate(city):
     rain = 'Rain : ' + r.html.find('span#wob_pp', first=True).text
     location = r.html.find('#wob_loc', first=True).text
 
-    return location , temp , description , humidity , wind , rain
+    data = f" {location}, \n {temp}, \n {humidity}, \n {rain}, \n {description}, \n {wind}"
+
+    return data
