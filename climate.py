@@ -5,7 +5,7 @@ def get_climate(city):
 
     r = HTMLSession().get(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36'})
 
-    temp = 'Temperature: ' + r.html.find('span#wob_tm', first=True).text + '°C'
+    temp = 'Temperature: ' + r.html.find('span#wob_tm.wob_t', first=True).text + '°C'
     description = r.html.find('span#wob_dc', first=True).text
     humidity = 'Humidity: ' + r.html.find('span#wob_hm', first=True).text
     wind = 'Wind: ' + r.html.find('span#wob_tws', first=True).text
