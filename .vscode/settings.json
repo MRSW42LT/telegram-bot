@@ -1,0 +1,6 @@
+{
+    "[python]": {
+        "files.trimTrailingWhitespace": true
+    },
+    "python.linting.enabled": false
+}
