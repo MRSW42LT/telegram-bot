@@ -7,6 +7,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, InlineQueryH
 from constants import API_KEY
 
 from finance.dolar import cotar_dolar
+from finance.stocks import getStockClose
 from geography.climate import get_climate
 
 # Enable logging
@@ -78,6 +79,7 @@ async def inline_query(update: Update, context) -> None:
             ),
         ]
         return await update.inline_query.answer(results)
+
 
 def main() -> None:
     """Run the bot."""
