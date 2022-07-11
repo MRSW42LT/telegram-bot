@@ -6,8 +6,8 @@ from telegram.constants import ParseMode
 from telegram.ext import Application, CommandHandler, ContextTypes, InlineQueryHandler
 from constants import API_KEY
 
-from dolar import cotar_dolar
-from climate import get_climate
+from finance.dolar import cotar_dolar
+from geography.climate import get_climate
 
 # Enable logging
 logging.basicConfig(
