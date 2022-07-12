@@ -1,4 +1,3 @@
-flask
 python-telegram-bot --pre
 beautifulsoup4
 requests-html

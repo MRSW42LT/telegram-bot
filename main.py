@@ -6,9 +6,9 @@ from telegram.constants import ParseMode
 from telegram.ext import Application, CommandHandler, ContextTypes, InlineQueryHandler
 from constants import API_KEY
 
-from finance.dolar import cotar_dolar
-from finance.stocks import getStockClose
-from geography.climate import get_climate
+from Functions.finance.dolar import cotar_dolar
+from Functions.finance.stocks import getStockClose
+from Functions.geography.climate import get_climate
 
 # Enable logging
 logging.basicConfig(
