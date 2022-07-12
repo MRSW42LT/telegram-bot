@@ -50,7 +50,7 @@ async def inline_query(update: Update, context) -> None:
                 id=str(uuid4()),
                 title="help",
                 input_message_content=InputTextMessageContent(
-                    'ajuda', parse_mode=ParseMode.HTML
+                    'Hi! Read the instructions on our website. https://denis.software/', parse_mode=ParseMode.HTML
                 ),
             ),
         ]
