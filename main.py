@@ -7,7 +7,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, InlineQueryH
 from constants import API_KEY
 
 from Functions.finance.dolar import cotar_dolar
-from Functions.finance.stocks import getStockClose
+#from Functions.finance.stocks import getStockClose
 from Functions.geography.climate import get_climate
 
 # Enable logging
