@@ -3,3 +3,4 @@ beautifulsoup4
 requests-html
 yfinance
 matplotlib
+libgen-api
