@@ -39,6 +39,9 @@ async def tempo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 async def stock_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     company = " ".join(context.args)
     await update.message.reply_text(stock(company))
+    if await update.message.reply_photo(photo=open('historyData.png', 'rb')):
+        import os
+        os.remove("historyData.png") 
 
 
 async def inline_query(update: Update, context) -> None:
