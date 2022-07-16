@@ -8,6 +8,7 @@ from constants import API_KEY
 
 from Functions.finance.dolar import cotar_dolar
 #from Functions.finance.stocks import getStockClose
+from Functions.finance.stocks import stock
 from Functions.geography.climate import get_climate
 
 # Enable logging
@@ -34,6 +35,10 @@ async def dolar_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 async def tempo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     city = " ".join(context.args)
     await update.message.reply_text(get_climate(city))
+
+async def stock_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    company = " ".join(context.args)
+    await update.message.reply_text(stock(company))
 
 
 async def inline_query(update: Update, context) -> None:
@@ -91,6 +96,7 @@ def main() -> None:
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("dolar", dolar_command))
     application.add_handler(CommandHandler("tempo", tempo_command))
+    application.add_handler(CommandHandler("stock", stock_command))
 
     # on non command i.e message - echo the message on Telegram
     application.add_handler(InlineQueryHandler(inline_query))

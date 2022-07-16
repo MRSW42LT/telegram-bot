@@ -4,3 +4,4 @@ requests-html
 yfinance
 matplotlib
 libgen-api
+pandas-datareader
