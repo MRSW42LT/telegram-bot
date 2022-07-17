@@ -30,7 +30,10 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 async def dolar_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /dolar is issued."""
-    await update.message.reply_text(cotar_dolar())
+    cotar_dolar()
+    await update.message.reply_photo(photo=open('dolarHistoryData.png', 'rb'))
+    import os
+    os.remove("dolarHistoryData.png")
 
 async def tempo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     city = " ".join(context.args)
