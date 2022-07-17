@@ -9,7 +9,7 @@ def stock(company):
     historyData = obj.history(period='1y', start='1910-01-01', end=str(date.today()))
     todayPrice = obj.history(period='1d', start=str(date.today()), end=str(date.today()))
     todayPrice = todayPrice['Close'][0]
-    todayPrice = round(todayPrice, 2)
+    todayPrice = round(todayPrice, 3)
     plt.style.use('ggplot')
     plt.plot(historyData['Close'])
     plt.title(str(company)+ ' -  $' + str(todayPrice))
@@ -17,4 +17,4 @@ def stock(company):
     plt.xlabel('Date')
     plt.savefig('historyData.png')
     
-    return str(todayPrice)
+    return f'{str(company)} price is $' + str(todayPrice)
