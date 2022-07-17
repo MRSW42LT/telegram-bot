@@ -16,5 +16,6 @@ def stock(company):
     plt.ylabel('Price ($)')
     plt.xlabel('Date')
     plt.savefig(f'historyData.png')
+    plt.close()
     
     return f'{str(company)} price is $' + str(todayPrice)
