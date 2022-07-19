@@ -66,6 +66,8 @@ async def inline_query(update: Update, context) -> None:
         ]
         return await update.inline_query.answer(results)
 
+
+
     if query == "/dolar":
         results = [
             InlineQueryResultArticle(
